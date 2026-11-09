@@ -13,6 +13,10 @@ from src.data_processing import schema
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_PATH = PROJECT_ROOT / "data" / "raw" / "ai4i2020.csv"
+SAMPLE_PATH = PROJECT_ROOT / "data" / "sample" / "ai4i2020.csv"  # committed demo copy
+
+MAX_UPLOAD_MB = 5
+MAX_ROWS = 50_000
 
 
 @dataclass
@@ -146,3 +150,20 @@ def get_features_and_target(df: pd.DataFrame):
     leaked = set(X.columns) & set(schema.LEAKAGE_COLUMNS + [schema.TARGET])
     assert not leaked, f"Leakage columns found in features: {leaked}"
     return X, y
+
+
+def read_csv_safely(file_obj, max_mb: int = MAX_UPLOAD_MB, max_rows: int = MAX_ROWS):
+    """Read an uploaded CSV with size and row limits. Raises ValueError with a
+    readable message instead of crashing the app."""
+    size = getattr(file_obj, "size", None)
+    if size is not None and size > max_mb * 1024 * 1024:
+        raise ValueError(f"File is larger than the {max_mb} MB limit.")
+    try:
+        df = pd.read_csv(file_obj, nrows=max_rows + 1)
+    except (pd.errors.EmptyDataError, pd.errors.ParserError, UnicodeDecodeError) as e:
+        raise ValueError(f"Could not read the file as a CSV: {e}") from e
+    if df.empty:
+        raise ValueError("The file contains no data rows.")
+    if len(df) > max_rows:
+        raise ValueError(f"File has more than {max_rows:,} rows (limit for this app).")
+    return df
