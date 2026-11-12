@@ -3,6 +3,7 @@
 Everything that learns from data (scaling, encoding) lives inside the pipeline,
 so during cross-validation it is fitted on each training fold only.
 """
+import re
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer, OneHotEncoder, StandardScaler
@@ -32,3 +33,23 @@ def build_preprocessor(use_physical: bool = True, scale: bool = False) -> Pipeli
     ).set_output(transform="pandas")
     steps.append(("columns", columns))
     return Pipeline(steps)
+
+def clean_column_names(df):
+    """Make column names safe for XGBoost, which rejects '[', ']' and '<'.
+
+    'Air temperature [K]' -> 'Air temperature_K'.
+    """
+    out = df.copy()
+    out.columns = [re.sub(r"\s*\[(.*?)\]", r"_\1", str(c)) for c in out.columns]
+    return out
+
+
+def build_model_pipeline(model, use_physical: bool = True, scale: bool = False) -> Pipeline:
+    """Full pipeline: preprocessing, name cleaning, then the model."""
+    return Pipeline(
+        [
+            ("prep", build_preprocessor(use_physical=use_physical, scale=scale)),
+            ("clean_names", FunctionTransformer(clean_column_names)),
+            ("model", model),
+        ]
+    )
