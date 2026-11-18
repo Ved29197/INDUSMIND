@@ -1,0 +1,5 @@
+check,rows,failures,pr_auc,pr_auc_ci_low,pr_auc_ci_high,recall,precision,missed,false_alarms,recall_hdf,recall_other,observed_rate,share_high_wear
+time_blocked,2000,39.0,0.77658686193575,0.6560180008104125,0.8829797074523157,0.717948717948718,0.6829268292682927,11.0,13.0,,,,
+unseen_hdf_physical_False,1616,152.0,,,,,,,19.0,0.16521739130434782,0.7027027027027027,,
+unseen_hdf_physical_True,1616,152.0,,,,,,,1.0,0.08695652173913043,0.6756756756756757,,
+risk_plateau,430,,,,,,,,,,,0.053488372093023255,0.6372093023255814
