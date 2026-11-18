@@ -1,31 +1,11 @@
 """The final failure model: pipeline + calibrator, built from TRAINING data only."""
-from dataclasses import dataclass
-
-import pandas as pd
 from sklearn.base import clone
 
 from src.classification.cross_validation import cross_validate_model
+from src.classification.failure_model import FailureModel
 from src.classification.models import NEEDS_SCALING, get_models
 from src.classification.pipelines import build_model_pipeline
 from src.evaluation.calibration import Calibrator, calibrate_oof
-
-
-@dataclass
-class FailureModel:
-    """A fitted pipeline plus the calibrator that turns its scores into probabilities."""
-
-    name: str
-    use_physical: bool
-    pipeline: object
-    calibrator: Calibrator
-    oof_raw: pd.Series          # out-of-fold raw scores on the training rows
-    oof_calibrated: pd.Series   # honestly calibrated out-of-fold probabilities
-
-    def predict_raw(self, X):
-        return self.pipeline.predict_proba(X)[:, 1]
-
-    def predict_calibrated(self, X):
-        return self.calibrator.predict(self.predict_raw(X))
 
 
 def fit_final_model(X_train, y_train, name: str = "Random Forest", use_physical: bool = True,

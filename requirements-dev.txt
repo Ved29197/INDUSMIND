@@ -1,2 +1,4 @@
 -r requirements.txt
 pytest
+
+xgboost-cpu==3.4.1

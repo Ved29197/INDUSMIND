@@ -1,0 +1,29 @@
+{
+  "model": "Random Forest",
+  "calibration": "isotonic",
+  "physical_features": true,
+  "built_at_utc": "2026-11-18T20:25:01+00:00",
+  "training_rows": 8000,
+  "training_failures": 271,
+  "base_failure_rate": 0.0339,
+  "random_seed": 42,
+  "recorded_test_results": {
+    "test_pr_auc": 0.847,
+    "test_pr_auc_ci_low": 0.752,
+    "test_pr_auc_ci_high": 0.926,
+    "test_roc_auc": 0.98,
+    "cv_pr_auc": 0.891
+  },
+  "versions": {
+    "python": "3.14.2",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1"
+  },
+  "data": "UCI AI4I 2020 (synthetic); see docs/data_dictionary.md",
+  "limitations": [
+    "Synthetic, partly rule-generated data; one split; about 68 test failures.",
+    "Cannot predict failure modes absent from its training data.",
+    "Output is an estimated risk, not a guaranteed failure."
+  ]
+}
