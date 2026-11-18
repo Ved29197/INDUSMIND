@@ -1,6 +1,7 @@
 # INDUSMIND: Project Status
 
 ## Completed
+- Phase 4: failure prediction complete. Frozen choices (Random Forest, physical features, isotonic calibration) evaluated once on the test set: PR-AUC 0.847 (95% interval 0.752 to 0.926). Model artifact and Failure Prediction page deployed. Details in docs/results/.
 - Phase 2: public repo, Codespaces workflow, Streamlit app deployed.
 - Phase 3: reproducible AI4I download, schema + validator + leakage guard (tested),
   EDA notebook, Dataset Explorer page (demo mode and safe CSV upload), data dictionary.
@@ -18,4 +19,6 @@
 - Models compared with and without engineered physical features.
 
 ## Open items
+- Model cannot predict failure modes absent from training data; engineering-limit overrides are shown on the Failure Prediction page and will feed the decision engine.
 - Key findings text cell in notebook 01 to be rewritten in own words.
+

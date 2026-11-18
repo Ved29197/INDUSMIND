@@ -21,7 +21,7 @@ cost and limited by crew and budget).
 |---|---|---|
 | 2 | Repo, Codespaces, deployed Streamlit skeleton | Done |
 | 3 | Data download, validation, EDA, Dataset Explorer page | Done |
-| 4 | Failure prediction and validation framework | Planned |
+| 4 | Failure prediction: split, models, calibration, cost-based thresholds, test evaluation, Failure Prediction page | Done |
 | 5 | Anomaly detection and SHAP explainability | Planned |
 | 6 | Maintenance decision engine | Planned |
 | 7 | Dashboard integration and demo mode | Planned |
