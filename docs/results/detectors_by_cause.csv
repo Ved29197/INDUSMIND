@@ -1,0 +1,6 @@
+group,failures,isolation_forest,knn_distance_top5,dbscan_noise
+TWF,10,2,2,0
+HDF,29,4,4,1
+PWF,13,12,12,9
+OSF,16,11,6,1
+RNF,0,0,0,0

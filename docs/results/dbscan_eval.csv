@@ -1,0 +1,2 @@
+eps,min_samples,clusters,dbscan_noise_train,dbscan_noise_test,dbscan_noise_flagged_test,dbscan_noise_failures_test,knn_flagged,knn_failures_flagged,knn_precision,knn_recall,knn_lift,knn_pr_auc,knn_pr_auc_ci_low,knn_pr_auc_ci_high,overlap_with_isolation_forest
+1.2259727074582751,16,1,0.01375,0.01,20,10,88,22,0.25,0.3235294117647059,7.352941176470588,0.31171653418294776,0.20665373487373664,0.42209642957407245,67
