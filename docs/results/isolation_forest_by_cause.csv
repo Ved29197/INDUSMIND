@@ -1,0 +1,7 @@
+group,failures,flagged_as_unusual,share_flagged
+TWF,10,2,0.2
+HDF,29,4,0.13793103448275862
+PWF,13,12,0.9230769230769231
+OSF,16,11,0.6875
+RNF,0,0,
+no cause flagged,2,0,0.0
